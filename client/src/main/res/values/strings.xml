@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">LAN热点客户端</string>
+    <string name="client_toolbar_subtitle">连接服务端热点并发送配网信息</string>
+    <string name="client_permission_denied">缺少必要权限，无法连接热点</string>
+    <string name="client_status_connecting">正在连接热点：%1$s</string>
+    <string name="client_status_connected">已连接热点：%1$s</string>
+    <string name="client_status_connected_snackbar">热点连接成功</string>
+    <string name="client_status_unavailable">热点不可用或连接失败</string>
+    <string name="client_status_lost">热点连接中断</string>
+    <string name="client_status_not_connected">请先连接服务端热点</string>
+    <string name="client_label_server_ssid">服务端热点 SSID</string>
+    <string name="client_label_server_password">服务端热点密码（如有）</string>
+    <string name="client_label_target_ssid">目标Wi-Fi SSID</string>
+    <string name="client_label_target_password">目标Wi-Fi 密码</string>
+    <string name="client_connect_button">连接服务端热点</string>
+    <string name="client_send_button">发送配网信息</string>
+    <string name="client_input_server_ssid">请输入服务端热点的 SSID</string>
+    <string name="client_input_target_ssid">请输入目标网络 SSID</string>
+    <string name="client_send_success">配网信息发送成功</string>
+    <string name="client_send_failure">配网信息发送失败</string>
+</resources>
+

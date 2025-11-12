@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/home/ubt/.gradle/daemon/8.13/com.lan.discovery.client-debug-37:/layout_activity_client.xml.flat",
+        "source": "/home/ubt/.gradle/daemon/8.13/com.lan.discovery.client-main-39:/layout/activity_client.xml"
+    },
+    {
+        "merged": "/home/ubt/.gradle/daemon/8.13/com.lan.discovery.client-debug-37:/xml_backup_rules.xml.flat",
+        "source": "/home/ubt/.gradle/daemon/8.13/com.lan.discovery.client-main-39:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "com.lan.discovery.client-debug-37:/layout_activity_client.xml.flat",
+        "source": "com.lan.discovery.client-main-39:/layout/activity_client.xml"
+    },
+    {
+        "merged": "/home/ubt/.gradle/daemon/8.13/com.lan.discovery.client-debug-37:/xml_data_extraction_rules.xml.flat",
+        "source": "/home/ubt/.gradle/daemon/8.13/com.lan.discovery.client-main-39:/xml/data_extraction_rules.xml"
+    }
+]

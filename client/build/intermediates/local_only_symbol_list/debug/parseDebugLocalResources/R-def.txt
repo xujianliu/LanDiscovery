@@ -1,0 +1,35 @@
+R_DEF: Internal format may change without notice
+local
+id client_connect_button
+id client_root
+id client_send_button
+id client_status
+id client_toolbar
+id server_password_input
+id server_ssid_input
+id target_password_input
+id target_ssid_input
+layout activity_client
+string app_name
+string client_connect_button
+string client_input_server_ssid
+string client_input_target_ssid
+string client_label_server_password
+string client_label_server_ssid
+string client_label_target_password
+string client_label_target_ssid
+string client_permission_denied
+string client_send_button
+string client_send_failure
+string client_send_success
+string client_status_connected
+string client_status_connected_snackbar
+string client_status_connecting
+string client_status_lost
+string client_status_not_connected
+string client_status_unavailable
+string client_toolbar_subtitle
+style Base.Theme.LanDiscovery.Client
+style Theme.LanDiscovery.Client
+xml backup_rules
+xml data_extraction_rules

@@ -1,0 +1,19 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.lan.discovery.client-mergeDebugResources-35:/values-h320dp-port-v13/values-h320dp-port-v13.xml",
+            "map": [
+                {
+                    "source": "/home/ubt/.gradle/caches/8.13/transforms/6fbe57fe8d875306f9ede53d3b80b206/transformed/material-1.13.0/res/values-h320dp-port-v13/values-h320dp-port-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "63",
+                        "endOffsets": "114"
+                    }
+                }
+            ]
+        }
+    ]
+}
