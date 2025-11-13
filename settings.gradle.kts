@@ -20,5 +20,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "LanDiscovery"
-include(":app")
+include(":server")
 include(":client")

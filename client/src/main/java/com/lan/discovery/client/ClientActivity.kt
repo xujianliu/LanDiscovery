@@ -204,7 +204,7 @@ class ClientActivity : AppCompatActivity() {
     private fun postProvisioning(network: Network, payload: JSONObject): Boolean {
         return runCatching {
             val ip = findIp()
-            val url = URL("http://192.168.93.225:8989/provision")
+            val url = URL("http://192.168.135.178:8989/provision")
             val connection = network.openConnection(url) as HttpURLConnection
             connection.requestMethod = "POST"
             connection.connectTimeout = 5_000

@@ -9,7 +9,7 @@ appcompat = "1.7.1"
 material = "1.13.0"
 activity = "1.11.0"
 constraintlayout = "2.2.1"
-nanohttpd = "2.2.0"
+nanohttpd = "2.3.1"
 lifecycleRuntimeKtx = "2.8.4"
 coroutines = "1.9.0"
 
