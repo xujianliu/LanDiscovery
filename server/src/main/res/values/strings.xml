@@ -9,7 +9,7 @@
     <string name="server_status_failed">热点启动失败，错误码：%1$d</string>
     <string name="server_status_exception">热点启动异常：%1$s</string>
     <string name="server_restart_button">重启热点</string>
-    <string name="server_log_hotspot_ready">热点已开启，SSID=%1$s</string>
+    <string name="server_log_hotspot_ready">热点已开启\nSSID：%1$s\n密码：%2$s\nHTTP端口：8989</string>
     <string name="server_log_hotspot_stopped">热点已停止</string>
     <string name="server_log_hotspot_failed">热点启动失败，错误码：%1$d</string>
     <string name="server_log_exception">启动热点异常：%1$s</string>
@@ -22,4 +22,6 @@
     <string name="start_service_button">启动服务</string>
     <string name="stop_service_button">停止服务</string>
     <string name="launcher_status_label">状态</string>
+    <string name="server_log_hotspot_config_applied">试图应用固定热点配置：%1$s</string>
+    <string name="server_log_hotspot_config_failed">应用固定热点配置失败：%1$s</string>
 </resources>

@@ -8,7 +8,6 @@ import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.wifi.SoftApConfiguration
 import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.Handler
@@ -111,9 +110,55 @@ class ServerService : Service() {
                 return@withContext
             }
 
-            // Note: we avoid creating a WifiConfiguration (deprecated). We'll prefer modern APIs when possible
-            // and only access reservation.wifiConfiguration (deprecated) guarded and suppressed below.
+            // Try to apply a fixed SSID and passphrase when supported by the platform.
+            // Use reflection so this compiles against lower compileSdk versions.
+            try {
+                try {
+                    val builderClass = Class.forName("android.net.wifi.SoftApConfiguration\$Builder")
+                    val builder = builderClass.getConstructor().newInstance()
+                    // setSsid(String)
+                    try {
+                        builderClass.getMethod("setSsid", String::class.java).invoke(builder, DEFAULT_HOTSPOT_SSID)
+                    } catch (_: NoSuchMethodException) { /* ignore */ }
 
+                    // setPassphrase(String, int) — find SECURITY_TYPE_WPA2_PSK reflectively
+                    try {
+                        val sapClass = Class.forName("android.net.wifi.SoftApConfiguration")
+                        val secField = try { sapClass.getField("SECURITY_TYPE_WPA2_PSK") } catch (_: NoSuchFieldException) { null }
+                        val secVal = secField?.getInt(null) ?: 4 // fallback common value
+                        try {
+                            builderClass.getMethod("setPassphrase", String::class.java, Integer.TYPE).invoke(builder, DEFAULT_HOTSPOT_PASSWORD, secVal)
+                        } catch (_: NoSuchMethodException) { /* ignore */ }
+                    } catch (_: Throwable) { /* ignore */ }
+
+                    // setHiddenSsid(boolean)
+                    try {
+                        builderClass.getMethod("setHiddenSsid", java.lang.Boolean.TYPE).invoke(builder, false)
+                    } catch (_: NoSuchMethodException) { /* ignore */ }
+
+                    // build()
+                    val buildMethod = builderClass.getMethod("build")
+                    val softCfg = buildMethod.invoke(builder)
+
+                    // wifiManager.setSoftApConfiguration(softCfg)
+                    try {
+                        val wmClass = wifiManager.javaClass
+                        val setMethod = wmClass.getMethod("setSoftApConfiguration", Class.forName("android.net.wifi.SoftApConfiguration"))
+                        setMethod.invoke(wifiManager, softCfg)
+                        appendLog(getString(R.string.server_log_hotspot_config_applied, DEFAULT_HOTSPOT_SSID))
+                    } catch (se: SecurityException) {
+                        appendLog(getString(R.string.server_log_hotspot_config_failed, se.localizedMessage ?: "security_exception"))
+                    } catch (t: Throwable) {
+                        appendLog(getString(R.string.server_log_hotspot_config_failed, t.localizedMessage ?: "error"))
+                    }
+                } catch (t: Throwable) {
+                    appendLog(getString(R.string.server_log_hotspot_config_failed, t.localizedMessage ?: "error"))
+                }
+            } catch (_: Throwable) {
+                // ignore failures here and fall back to system behavior
+            }
+
+            // Start the local-only hotspot; the platform may use the SoftApConfiguration we attempted to set above
             wifiManager.startLocalOnlyHotspot(object : WifiManager.LocalOnlyHotspotCallback() {
                 override fun onStarted(reservation: WifiManager.LocalOnlyHotspotReservation?) {
                     hotspotReservation = reservation
@@ -126,7 +171,7 @@ class ServerService : Service() {
                     if (!confSsid.isNullOrEmpty()) ssid = confSsid
                     if (!confPass.isNullOrEmpty()) password = confPass
                     val status = getString(R.string.server_status_running, ssid, password)
-                    appendLog(getString(R.string.server_log_hotspot_ready, ssid))
+                    appendLog(getString(R.string.server_log_hotspot_ready, ssid,password))
                     updateNotification(status)
                 }
 
@@ -281,6 +326,10 @@ class ServerService : Service() {
         private const val NOTIFICATION_CHANNEL_ID = "lan_discovery_server_channel"
         private const val NOTIFICATION_ID = 1327
 
+        // Fixed hotspot credentials (change as needed)
+        const val DEFAULT_HOTSPOT_SSID = "LanDiscoveryAP"
+        const val DEFAULT_HOTSPOT_PASSWORD = "lan123456"
+
         // Actions exported for Activity ↔ Service communication
         const val ACTION_START = "com.lan.discovery.server.action.START"
         const val ACTION_STOP = "com.lan.discovery.server.action.STOP"
@@ -289,11 +338,7 @@ class ServerService : Service() {
 
         fun startService(context: Context) {
             val intent = Intent(context, ServerService::class.java).apply { action = ACTION_START }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                context.startForegroundService(intent)
-            } else {
-                context.startService(intent)
-            }
+            context.startForegroundService(intent)
         }
 
         fun stopService(context: Context) {
