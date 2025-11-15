@@ -2,7 +2,7 @@
     <string name="app_name">LAN热点服务端</string>
     <string name="server_toolbar_subtitle">自动开启本地热点，等待客户端配网</string>
     <string name="server_permission_denied">缺少必要权限，无法启动热点</string>
-    <string name="server_status_starting">热点与HTTP服务启动中...</string>
+    <string name="server_status_starting">热点与HTTP服务启动中…</string>
     <string name="server_status_running">热点已开启\nSSID：%1$s\n密码：%2$s\nHTTP端口：8989</string>
     <string name="server_status_unknown">未知</string>
     <string name="server_status_stopped">热点已停止</string>
@@ -17,4 +17,9 @@
     <string name="server_log_http_failed">HTTP服务启动失败：%1$s</string>
     <string name="server_log_received_payload">收到配网请求，目标热点：%1$s，密码：%2$s</string>
     <string name="server_log_no_password">无密码</string>
+    <string name="launcher_status_permissions_ok">所有必要权限已授予</string>
+    <string name="launcher_status_missing_permissions">缺少权限：%1$s</string>
+    <string name="start_service_button">启动服务</string>
+    <string name="stop_service_button">停止服务</string>
+    <string name="launcher_status_label">状态</string>
 </resources>

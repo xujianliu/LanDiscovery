@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/statusText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/launcher_status_label"
+        android:padding="8dp" />
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start_service_button"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:id="@+id/btnStop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/stop_service_button"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/logsLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logs"
+        android:paddingTop="12dp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:paddingTop="4dp">
+
+        <TextView
+            android:id="@+id/logsText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAppearance="?attr/textAppearanceBody2"
+            android:padding="8dp"
+            android:scrollbars="vertical" />
+
+    </ScrollView>
+
+</LinearLayout>
